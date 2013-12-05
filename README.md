@@ -1,7 +1,7 @@
 DataTables-Generator-for-DOORs
 ==============================
 
-This provides semi-hacky way of getting IBMs Rational DOORs data into a pretty DataTables HTML file
+This provides semi-hacky way of getting IBM's Rational DOORS data into a pretty DataTables HTML file
 
 About
 ------------------------------
