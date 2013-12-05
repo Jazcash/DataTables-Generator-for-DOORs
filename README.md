@@ -6,7 +6,7 @@ This provides semi-hacky way of getting IBMs Rational DOORs data into a pretty D
 About
 ------------------------------
 Firstly, this was created for my specific work purposes and is probably not useful in any other situation.
-Secondly, there was particular limitations when designing how this would work, therefore it may use some bizare methods, libraries or software.
+Secondly, there was particular limitations when designing how this would work, therefore it may use some bizarre methods, libraries or software.
 
 Dependancies and used libraries
 ------------------------------
