@@ -1,0 +1,138 @@
+<html>
+<head>
+	<link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<link href="http://www.datatables.net/release-datatables/media/css/demo_table_jui.css" rel="stylesheet" type="text/css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="libs/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			//DataTable
+			var suzNums = [];
+			var rAndDNums = [];
+			$('#example').dataTable( {
+				"sScrollY": "758px",
+				"bScrollCollapse": true,
+		    	"bProcessing": true,
+		    	"bJQueryUI": true,
+		    	"bPaginate": false,
+		    	"sAjaxDataProp": "Items",
+		    	"aoColumns": [
+			        { "mData": "Title", 					"sWidth": "25%" },
+			        { "mData": "ValidityVariantVersion", 	"sWidth": "10%" },
+			        { "mData": "CSCI", 						"sWidth": "5%"  },
+			        { "mData": "Browsertitle", 				"sWidth": "5%"  },
+			        { "mData": "R&Ddocnumber", 				"sWidth": "6%"  },
+			        { "mData": "SUZdocnumber", 				"sWidth": "6%"  }
+			    ],
+		    	"sPaginationType": "full_numbers",
+		    	"sAjaxSource": 'output/data.json',
+		    	"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+				    suzNums.push(aData.DMSSUZpdfID);
+				    rAndDNums.push(aData.DMSTNFpdfID);
+
+				},
+				"fnInitComplete" : function() {
+				    $("tr > td:nth-child(2)").each(function(){
+				    	var variantVersion = $(this).html().split(",");
+				    	if (variantVersion.length > 1){
+				    		var vvString = "";
+				    		for (i=0; i<variantVersion.length; i++){
+				    			vvString += variantVersion[i] + "</br>";
+				    		}
+				    		$(this).html(vvString);
+				    	}
+				    });
+				    $("tr > td:nth-child(5)").each(function(i){
+				    	$(this).wrapInner("<a href='http://sot2247.eu.eurocopter.corp/SUZDms/action.php?kt_path_info=ktcore.actions.document.view&fDocumentId="+rAndDNums[i]+"'></a>");
+				    });
+				    $("tr > td:nth-child(6)").each(function(i){
+				    	$(this).wrapInner("<a href='http://sot2247.eu.eurocopter.corp/SUZDms/action.php?kt_path_info=ktcore.actions.document.view&fDocumentId="+suzNums[i]+"'></a>");
+				    });
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+<div id="container">
+	<table id="example" width="100%">
+		<thead>
+	        <tr>
+	            <th>Title</th>
+	            <th>Variant + Version</th>
+	            <th>CSCI</th>
+	            <th>Doc Type</th>  
+	            <th>R&D Doc Number</th>
+	            <th>SUZ Doc Number</th>
+	        </tr>
+	    </thead>
+	</table>
+</div>
+</body>
+</html>
+<style>
+/* START CSS RESET */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* END CSS RESET */
+
+body{
+	font-family: 'Open Sans', Arial;
+	font-size: 12px;
+	padding: 10px;
+}
+b{
+	font-weight: bold;
+}
+#container{
+	background: #eee;
+}
+td{
+	border: 1px solid #ccc;
+	padding: 5px 3px 5px 3px;
+	vertical-align: middle;
+}
+.DataTables_sort_icon { display:inline-block;}
+.DataTables_sort_wrapper{padding: 5px;}
+</style>
